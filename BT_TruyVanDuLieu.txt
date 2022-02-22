@@ -1,0 +1,51 @@
+use quanlysinhvien;
+insert into Class
+values(1, 'A1', '2008-12-20', 1);
+insert into Class
+values(2, 'A2', '2008-12-22', 1);
+insert into Class
+values(3, 'B3', current_date, 0);
+INSERT INTO student(`StudentName`, `Address`, `Phone`, `Status`, `ClassId`) 
+VALUES ('Hung', 'Ha noi', '0912113113', 1, 1);
+INSERT INTO student (`StudentName`, `Address`, `Status`, `ClassId`) 
+VALUES ('Hoa', 'Hai Phong', 1, 1);
+INSERT INTO student (`StudentName`, `Address`, `Phone`, `Status`, `ClassId`)
+VALUES ('Manh', 'HCM', '0123123123', 0, 2);
+insert into Subject
+values (1, 'CF', 5, 1),
+(2, 'C', 6, 1),
+(3, 'HDJ', 5, 1),
+(4, 'RDBMS', 10, 1);
+insert into mark
+values (1, 1, 2, 8, 1),
+(2, 1, 3, 10, 2),
+(3, 2, 4, 12, 1);
+select *
+from student;
+select *
+from student
+where Status = true;
+select *
+from subject
+where credit <10;
+select S.StudentId, S.StudentName, C.Name
+from Student S join Class C on S.ClassId = C.ClassId;
+select S.studentId, s.StudentName, c.Name
+from student s join class c on s.classId = c.ClassId
+where c.Name = 'A1';
+select s.studentId, s.studentName, Sub.subName, m.mark
+from student s join mark M on S.studentId = m.StudentId join subject sub on M.SubId = sub.SubID;
+select s.studentId, s.studentName, Sub.subName, m.mark
+from student s join mark M on S.studentId = m.StudentId join subject sub on M.SubId = sub.SubID
+where sub.subname = 'CF';
+select *
+from student where StudentName regexp '^H';
+select *
+from class where  month(startDate) = '12';
+select *
+from subject where Credit between 3 and 5;
+update quanlysinhvien.student set classId = '2' where studentName = 'Hung';
+select StudentName, subName, Mark
+from student join mark on student.StudentId = mark.StudentId
+join subject on MarkId = subject.SubID
+ order by Mark desc;
